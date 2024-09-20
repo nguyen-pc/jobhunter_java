@@ -67,6 +67,7 @@ public class Company {
         this.createdAt = Instant.now();
     }
 
+
     @PreUpdate
     public void handleBeforeUpdate() {
         this.updatedBy = SecurityUtil.getCurrentUserLogin().isPresent() == true
@@ -75,4 +76,5 @@ public class Company {
 
         this.updatedAt = Instant.now();
     }
+    
 }
