@@ -9,6 +9,7 @@ import vn.hoidanit.jobhunter.domain.Company;
 import vn.hoidanit.jobhunter.domain.User;
 import vn.hoidanit.jobhunter.domain.response.ResultPaginationDTO;
 import vn.hoidanit.jobhunter.service.CompanyService;
+import vn.hoidanit.jobhunter.util.annotation.ApiMessage;
 
 import java.util.List;
 import java.util.Optional;
@@ -76,6 +77,13 @@ public class CompanyController {
     public ResponseEntity<Void> deleteCompany(@PathVariable("id") long id){
         this.companyService.handleDeleteCompany(id);
         return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/companies/{id}")
+    @ApiMessage("fetch company by id")
+    public ResponseEntity<Company> fetchCompanyById(@PathVariable("id") long id){
+        Optional<Company> cOptional = this.companyService.findById(id);
+        return ResponseEntity.ok().body(cOptional.get());
     }
     
 }
